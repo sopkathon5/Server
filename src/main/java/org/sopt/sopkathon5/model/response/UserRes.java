@@ -9,7 +9,6 @@ public class UserRes {
 	private String email;
 	private String password;
 	private String nickname;
-	private LocalDateTime birth;
 	private int sex;
 	private int point;
 
@@ -18,7 +17,6 @@ public class UserRes {
 		this.email = user.getEmail();
 		this.password = user.getPassword();
 		this.nickname = user.getNickname();
-		this.birth = user.getBirth();
 		this.sex = user.getSex();
 		this.point = 0;
 	}

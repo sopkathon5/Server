@@ -11,6 +11,6 @@ public class JoinReq {
 	private String email;
 	private String password;
 	private String nickname;
-	private LocalDateTime birth;
 	private int sex;
+	private int point;
 }
