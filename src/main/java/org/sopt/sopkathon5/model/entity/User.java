@@ -3,6 +3,7 @@ package org.sopt.sopkathon5.model.entity;
 import java.time.LocalDateTime;
 
 import lombok.*;
+import org.sopt.sopkathon5.model.request.JoinReq;
 
 @Getter
 @Setter
@@ -17,11 +18,11 @@ public class User {
 	private int point;
 
 	@Builder
-	public User(String email, String password, String nickname, LocalDateTime birth, int sex) {
-		this.email = email;
-		this.password = password;
-		this.nickname = nickname;
-		this.birth = birth;
-		this.sex = sex;
+	public User(JoinReq joinReq) {
+		this.email = joinReq.getEmail();
+		this.password = joinReq.getPassword();
+		this.nickname = joinReq.getNickname();
+		this.birth = joinReq.getBirth();
+		this.sex = joinReq.getSex();
 	}
 }

@@ -5,6 +5,13 @@ import java.util.Optional;
 import javax.servlet.http.HttpServletRequest;
 
 import lombok.extern.slf4j.Slf4j;
+import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.Around;
+import org.aspectj.lang.annotation.Aspect;
+import org.sopt.sopkathon5.mapper.UserMapper;
+import org.sopt.sopkathon5.model.entity.User;
+import org.sopt.sopkathon5.model.response.DefaultRes;
+import org.sopt.sopkathon5.service.JwtService;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,17 +31,15 @@ public class AuthAspect {
 	private final static ResponseEntity<DefaultRes> RES_RESPONSE_ENTITY = new ResponseEntity<>(DEFAULT_RES, HttpStatus.UNAUTHORIZED);
 
 	private final HttpServletRequest httpServletRequest;
-
-	private final UserRepository userRepository;
-
+	private final UserMapper userMapper;
 	private final JwtService jwtService;
 
 	/**
 	 * Repository 의존성 주입
 	 */
-	public AuthAspect(final HttpServletRequest httpServletRequest, final UserRepository userRepository, final JwtService jwtService) {
+	public AuthAspect(final HttpServletRequest httpServletRequest, final UserMapper userMapper, final JwtService jwtService) {
 		this.httpServletRequest = httpServletRequest;
-		this.userRepository = userRepository;
+		this.userMapper = userMapper;
 		this.jwtService = jwtService;
 	}
 
@@ -46,7 +51,7 @@ public class AuthAspect {
 	 * @throws Throwable
 	 */
 	//항상 @annotation 패키지 이름을 실제 사용할 annotation 경로로 맞춰줘야 한다.
-	@Around("@annotation(kr.co.famfam.server.utils.auth.Auth)")
+	@Around("@annotation(org.sopt.sopkathon5.utils.auth.Auth)")
 	public Object around(final ProceedingJoinPoint pjp) throws Throwable {
 		final String jwt = httpServletRequest.getHeader(AUTHORIZATION);
 
@@ -62,7 +67,7 @@ public class AuthAspect {
 		if (token == null) {
 			return RES_RESPONSE_ENTITY;
 		} else {
-			final Optional<User> user = userRepository.findById(token.getUser_idx());
+			final Optional<User> user = userMapper.findUserByUserIdx(token.getUser_idx());
 
 			//유효 사용자 검사
 			if (!user.isPresent()) {
