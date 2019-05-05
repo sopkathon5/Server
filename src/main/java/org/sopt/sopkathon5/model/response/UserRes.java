@@ -1,7 +1,5 @@
 package org.sopt.sopkathon5.model.response;
 
-import java.time.LocalDateTime;
-
 import org.sopt.sopkathon5.model.entity.User;
 
 public class UserRes {
@@ -20,4 +18,5 @@ public class UserRes {
 		this.sex = user.getSex();
 		this.point = 0;
 	}
+
 }

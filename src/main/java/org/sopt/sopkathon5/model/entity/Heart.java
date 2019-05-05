@@ -11,7 +11,7 @@ public class Heart {
 	private int contentIdx;
 
 	@Builder
-	public Heart(int userIdx, int contentIdx){
+	public Heart(int userIdx, int contentIdx) {
 		this.userIdx = userIdx;
 		this.contentIdx = contentIdx;
 	}

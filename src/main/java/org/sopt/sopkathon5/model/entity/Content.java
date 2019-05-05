@@ -19,7 +19,7 @@ public class Content {
 	private int commentCount;
 
 	@Builder
-	public Content(ContentReq contentReq){
+	public Content(ContentReq contentReq) {
 		this.userIdx = contentReq.getUserIdx();
 		this.keywordIdx = contentReq.getKeywordIdx();
 		this.content = contentReq.getContent();

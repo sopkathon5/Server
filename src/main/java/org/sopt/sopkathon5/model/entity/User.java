@@ -1,7 +1,5 @@
 package org.sopt.sopkathon5.model.entity;
 
-import java.time.LocalDateTime;
-
 import lombok.*;
 import org.sopt.sopkathon5.model.request.JoinReq;
 import org.sopt.sopkathon5.model.request.LoginReq;

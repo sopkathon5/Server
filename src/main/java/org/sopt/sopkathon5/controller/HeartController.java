@@ -1,13 +1,15 @@
 package org.sopt.sopkathon5.controller;
 
 import lombok.extern.slf4j.Slf4j;
-import org.sopt.sopkathon5.model.request.ContentReq;
 import org.sopt.sopkathon5.model.response.DefaultRes;
 import org.sopt.sopkathon5.service.HeartService;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import static org.sopt.sopkathon5.model.response.DefaultRes.FAIL_DEFAULT_RES;
 

@@ -3,6 +3,7 @@ package org.sopt.sopkathon5.model.entity;
 import java.time.LocalDateTime;
 
 import lombok.*;
+import org.sopt.sopkathon5.model.request.CommentReq;
 
 @Getter
 @Setter
@@ -15,10 +16,10 @@ public class Comment {
 	private LocalDateTime createdAt;
 
 	@Builder
-	public Comment(int contentIdx, int userIdx, String content){
-		this.contentIdx = contentIdx;
-		this.userIdx = userIdx;
-		this.content = content;
+	public Comment(CommentReq commentReq) {
+		this.contentIdx = commentReq.getContentIdx();
+		this.userIdx = commentReq.getUserIdx();
+		this.content = commentReq.getContent();
 		this.createdAt = LocalDateTime.now();
 	}
 }

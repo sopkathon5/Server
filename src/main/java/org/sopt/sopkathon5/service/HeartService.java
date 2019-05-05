@@ -3,8 +3,6 @@ package org.sopt.sopkathon5.service;
 import lombok.extern.slf4j.Slf4j;
 import org.sopt.sopkathon5.mapper.ContentMapper;
 import org.sopt.sopkathon5.mapper.HeartMapper;
-import org.sopt.sopkathon5.model.entity.Content;
-import org.sopt.sopkathon5.model.request.ContentReq;
 import org.sopt.sopkathon5.model.response.DefaultRes;
 import org.sopt.sopkathon5.utils.ResponseMessage;
 import org.sopt.sopkathon5.utils.StatusCode;
@@ -22,11 +20,11 @@ public class HeartService {
 		this.contentMapper = contentMapper;
 	}
 
-	public DefaultRes heart(final int userIdx, final int contentIdx){
+	public DefaultRes heart(final int userIdx, final int contentIdx) {
 		try {
 
 			int heartCount = contentMapper.findHeart(contentIdx);
-			heartCount = heartCount+1;
+			heartCount = heartCount + 1;
 			contentMapper.addHeart(heartCount, contentIdx);
 
 			heartMapper.add(userIdx, contentIdx);

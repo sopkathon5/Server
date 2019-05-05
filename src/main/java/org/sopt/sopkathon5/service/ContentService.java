@@ -39,7 +39,7 @@ public class ContentService {
 	}
 
 	// 게시글 목록
-	public DefaultRes contentList (final int keywordIdx) {
+	public DefaultRes contentList(final int keywordIdx) {
 		try {
 			List<Content> contents = contentMapper.findAllContent(keywordIdx);
 			return DefaultRes.res(StatusCode.OK, "게시글 목록 조회 성공", contents);
@@ -52,7 +52,7 @@ public class ContentService {
 	}
 
 	// 게시글
-	public DefaultRes content (final int contentIdx) {
+	public DefaultRes content(final int contentIdx) {
 		try {
 			Content content = contentMapper.findContent(contentIdx);
 			return DefaultRes.res(StatusCode.OK, "게시글 조회 성공", content);
@@ -65,7 +65,7 @@ public class ContentService {
 	}
 
 	// 게시글 추가
-	public DefaultRes addContent (final ContentReq contentReq){
+	public DefaultRes addContent(final ContentReq contentReq) {
 		try {
 			Content content = new Content(contentReq);
 			contentMapper.addContent(content);

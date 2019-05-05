@@ -13,7 +13,7 @@ public class Keyword {
 	private LocalDateTime endDate;
 
 	@Builder
-	public Keyword(String content, LocalDateTime endDate){
+	public Keyword(String content, LocalDateTime endDate) {
 		this.content = content;
 		this.endDate = endDate;
 	}

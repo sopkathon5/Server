@@ -6,6 +6,7 @@ import org.sopt.sopkathon5.model.entity.User;
 import org.sopt.sopkathon5.model.request.JoinReq;
 import org.sopt.sopkathon5.model.request.LoginReq;
 import org.sopt.sopkathon5.model.response.DefaultRes;
+import org.sopt.sopkathon5.model.response.LoginRes;
 import org.sopt.sopkathon5.service.UserService;
 import org.sopt.sopkathon5.utils.ResponseMessage;
 import org.sopt.sopkathon5.utils.StatusCode;
@@ -43,20 +44,19 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public DefaultRes login(final LoginReq loginReq){
+	public DefaultRes login(final LoginReq loginReq) {
 		try {
 
 			User loginUser = new User(loginReq);
 
 			final User user = userMapper.findUserByEmailAndPassword(loginUser.getEmail(), loginUser.getPassword());
-			if (user == null)
+			if (user == null) {
 				return DefaultRes.res(StatusCode.UNAUTHORIZED, ResponseMessage.LOGIN_FAIL);
+			}
 
-//			Map<String, Object> result = new HashMap<>();
+			LoginRes result = new LoginRes(user.getUserIdx(), user.getNickname());
 
-//			result.put("user", new UserRes(user.get()));
-
-			return DefaultRes.res(StatusCode.OK, ResponseMessage.LOGIN_SUCCESS, user.getUserIdx());
+			return DefaultRes.res(StatusCode.OK, ResponseMessage.LOGIN_SUCCESS, result);
 		} catch (Exception e) {
 			e.getStackTrace();
 			log.error(e.getMessage());
@@ -65,7 +65,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public DefaultRes point(final int userIdx){
+	public DefaultRes point(final int userIdx) {
 		try {
 			int point = userMapper.point(userIdx);
 

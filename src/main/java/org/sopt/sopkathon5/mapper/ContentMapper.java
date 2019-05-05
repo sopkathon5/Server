@@ -15,14 +15,20 @@ public interface ContentMapper {
 	List<Content> findAllContent(@Param("keywordIdx") final int keywordIdx);
 
 	@Select("SELECT * FROM content WHERE contentIdx = #{contentIdx}")
-	Content findContent (@Param("contentIdx") final int contentIdx);
+	Content findContent(@Param("contentIdx") final int contentIdx);
 
 	@Insert("INSERT INTO content(keywordIdx, userIdx, createdAt, name, content, heartCount, commentCount) VALUES(#{content.keywordIdx}, #{content.userIdx}, #{content.createdAt}, #{content.name}, #{content.content}, #{content.heartCount}, #{content.commentCount})")
-	void addContent (@Param("content") Content content);
+	void addContent(@Param("content") Content content);
 
 	@Update("UPDATE content SET heartCount = #{heartCount} WHERE contentIdx = #{contentIdx}")
-	void addHeart (@Param("heartCount") final int heartCount, @Param("contentIdx") final int contentIdx);
+	void addHeart(@Param("heartCount") final int heartCount, @Param("contentIdx") final int contentIdx);
+
+	@Update("UPDATE content SET commentCount = #{commentCount} WHERE contentIdx = #{contentIdx}")
+	void addComment(@Param("commentCount") final int commentCount, @Param("contentIdx") final int contentIdx);
 
 	@Select("SELECT heartCount FROM content WHERE contentIdx = #{contentIdx}")
-	int findHeart (@Param("contentIdx") final int contentIdx);
+	int findHeart(@Param("contentIdx") final int contentIdx);
+
+	@Select("SELECT commentCount FROM content WHERE contentIdx = #{contentIdx}")
+	int findComment(@Param("contentIdx") final int contentIdx);
 }
