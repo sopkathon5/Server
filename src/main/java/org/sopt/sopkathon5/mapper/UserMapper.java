@@ -2,10 +2,7 @@ package org.sopt.sopkathon5.mapper;
 
 import java.util.Optional;
 
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 import org.sopt.sopkathon5.model.entity.User;
 
 @Mapper
@@ -21,4 +18,10 @@ public interface UserMapper {
 
 	@Insert("INSERT INTO user(email, password, nickname, sex, point) VALUES(#{user.email}, #{user.password}, #{user.nickname}, #{user.sex}, #{user.point})")
 	void save(@Param("user") final User user);
+
+	@Select("SELECT point FROM user WHERE userIdx = #{userIdx}")
+	int point(@Param("userIdx") final int userIdx);
+
+	@Update("UPDATE user SET point = #{point} WHERE userIdx = #{userIdx}")
+	void addpoint(@Param("userIdx") final int userIdx, @Param("point") final int point);
 }

@@ -3,6 +3,7 @@ package org.sopt.sopkathon5.model.entity;
 import java.time.LocalDateTime;
 
 import lombok.*;
+import org.sopt.sopkathon5.model.request.ContentReq;
 
 @Getter
 @Setter
@@ -18,11 +19,13 @@ public class Content {
 	private int commentCount;
 
 	@Builder
-	public Content(int userIdx, int keywordIdx, String name, String content){
-		this.userIdx = userIdx;
-		this.keywordIdx = keywordIdx;
-		this.content = content;
-		this.name = name;
+	public Content(ContentReq contentReq){
+		this.userIdx = contentReq.getUserIdx();
+		this.keywordIdx = contentReq.getKeywordIdx();
+		this.content = contentReq.getContent();
+		this.name = contentReq.getName();
 		this.createdAt = LocalDateTime.now();
+		this.heartCount = 0;
+		this.commentCount = 0;
 	}
 }

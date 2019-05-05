@@ -47,4 +47,14 @@ public class UserController {
 		}
 	}
 
+	@GetMapping("/point/{userIdx}")
+	public ResponseEntity point(@PathVariable(value = "userIdx") final int userIdx) {
+		try {
+			return new ResponseEntity<>(userService.point(userIdx), HttpStatus.OK);
+		} catch (Exception e) {
+			log.error(e.getMessage());
+			return new ResponseEntity<>(FAIL_DEFAULT_RES, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+
 }

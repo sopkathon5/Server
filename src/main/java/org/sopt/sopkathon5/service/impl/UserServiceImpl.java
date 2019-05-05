@@ -1,22 +1,16 @@
 package org.sopt.sopkathon5.service.impl;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
-
 import lombok.extern.slf4j.Slf4j;
 import org.sopt.sopkathon5.mapper.UserMapper;
 import org.sopt.sopkathon5.model.entity.User;
 import org.sopt.sopkathon5.model.request.JoinReq;
 import org.sopt.sopkathon5.model.request.LoginReq;
 import org.sopt.sopkathon5.model.response.DefaultRes;
-import org.sopt.sopkathon5.model.response.UserRes;
 import org.sopt.sopkathon5.service.UserService;
 import org.sopt.sopkathon5.utils.ResponseMessage;
 import org.sopt.sopkathon5.utils.StatusCode;
 
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 @Slf4j
 @Service
@@ -62,7 +56,7 @@ public class UserServiceImpl implements UserService {
 
 //			result.put("user", new UserRes(user.get()));
 
-			return DefaultRes.res(StatusCode.OK, ResponseMessage.LOGIN_SUCCESS);
+			return DefaultRes.res(StatusCode.OK, ResponseMessage.LOGIN_SUCCESS, user.getUserIdx());
 		} catch (Exception e) {
 			e.getStackTrace();
 			log.error(e.getMessage());
@@ -70,5 +64,17 @@ public class UserServiceImpl implements UserService {
 		}
 	}
 
+	@Override
+	public DefaultRes point(final int userIdx){
+		try {
+			int point = userMapper.point(userIdx);
+
+			return DefaultRes.res(StatusCode.OK, "포인트 조회 성공", point);
+		} catch (Exception e) {
+			e.getStackTrace();
+			log.error(e.getMessage());
+			return DefaultRes.res(StatusCode.DB_ERROR, ResponseMessage.DB_ERROR);
+		}
+	}
 
 }
